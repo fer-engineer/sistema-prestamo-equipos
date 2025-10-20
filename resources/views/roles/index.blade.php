@@ -1,0 +1,78 @@
+@extends('layouts.app')
+
+@section('title', 'Roles')
+
+@section('content')
+
+<div class="flex items-center justify-between mb-6">
+    <div>
+        <h2 class="text-2xl font-semibold text-gray-800">Roles</h2>
+        <p class="text-sm text-gray-500">Listado de roles de usuario registrados.</p>
+    </div>
+
+    <div class="flex items-center gap-3">
+        <a href="{{ route('roles.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            Nuevo Rol
+        </a>
+    </div>
+</div>
+
+@if (session('success'))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+        <span class="block sm:inline">{{ session('success') }}</span>
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+        <span class="block sm:inline">{{ session('error') }}</span>
+    </div>
+@endif
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">ID</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Nombre</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Descripción</th>
+                    <th class="px-6 py-3 text-right text-xs font-bold text-gray-700 uppercase tracking-wider">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody class="bg-white">
+                @forelse($roles as $rol)
+                <tr class="bg-white hover:bg-gray-50">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $rol->id }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $rol->nombre }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-600 max-w-xl truncate">{{ $rol->descripcion }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <a href="{{ route('roles.show', $rol) }}" class="inline-flex items-center px-3 py-1.5 mr-2 bg-blue-100 text-blue-800 border border-blue-200 rounded hover:bg-blue-200 text-sm">Ver</a>
+                        <a href="{{ route('roles.edit', $rol) }}" class="inline-flex items-center px-3 py-1.5 mr-2 bg-green-100 text-green-800 border border-green-200 rounded hover:bg-green-200 text-sm">Modificar</a>
+                        <form action="{{ route('roles.destroy', $rol) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-800 border border-red-200 rounded hover:bg-red-200 text-sm btn-eliminar">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="4" class="px-6 py-12 text-center text-gray-500">
+                        No hay roles registrados.
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+    <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
+        {{ $roles->links() }}
+    </div>
+</div>
+
+@endsection
