@@ -71,7 +71,7 @@
             <!-- Campo Fecha de Adquisición -->
             <div class="space-y-2">
                 <label for="fecha_adquisicion" class="text-sm font-semibold text-gray-700">Fecha de Adquisición</label>
-                <input type="date" id="fecha_adquisicion" name="fecha_adquisicion" class="block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm @error('fecha_adquisicion') border-red-500 @enderror" value="{{ old('fecha_adquisicion', $equipo->fecha_adquisicion->format('Y-m-d')) }}">
+                <input type="date" id="fecha_adquisicion" name="fecha_adquisicion" class="block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm @error('fecha_adquisicion') border-red-500 @enderror" value="{{ old('fecha_adquisicion', $equipo->fecha_adquisicion ? $equipo->fecha_adquisicion->format('Y-m-d') : '') }}">
                 @error('fecha_adquisicion')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror

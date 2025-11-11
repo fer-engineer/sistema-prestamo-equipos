@@ -45,7 +45,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $equipo->modelo }}</td>
                     <td class="px-6 py-4 text-sm text-gray-600 max-w-md truncate">{{ $equipo->descripcion }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ $equipo->estado->nombre }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ $equipo->fecha_adquisicion->format('d/m/Y') }}</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ $equipo->fecha_adquisicion ? $equipo->fecha_adquisicion->format('d/m/Y') : 'N/A' }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <a href="{{ route('equipos.show', $equipo) }}" class="inline-flex items-center px-3 py-1.5 mr-2 bg-blue-100 text-blue-800 border border-blue-200 rounded hover:bg-blue-200 text-sm">Ver</a>
                         @can('update', $equipo)

@@ -7,6 +7,7 @@ use App\Models\TipoUsuario;
 use App\Models\Estado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 
 class PersonaController extends Controller
 {
